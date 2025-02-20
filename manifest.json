@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Bilibili Search Blocker",
+  "description": "屏蔽B站搜索页面不想看的UP主",
+  "version": "1.0",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://search.bilibili.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon48_gray.png"
+    },
+    "default_title": "Bilibili Search Blocker\u000A屏蔽B站搜索页不想看的UP主"
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src 'self';"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content.wasm",
+        "popup.wasm",
+        "background.wasm"
+      ],
+      "matches": [
+        "https://search.bilibili.com/*"
+      ]
+    }
+  ]
+}
